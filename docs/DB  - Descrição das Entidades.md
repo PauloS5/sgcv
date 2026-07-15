@@ -6,4 +6,3 @@
 * **Vacina:** id_vacina (PK), nome, fabricante, descricao
 * **Vacinacao:** id_vacinacao (PK), data_aplicacao, proxima_dose, observacoes, id_animal (FK), id_vacina (FK), id_veterinario (FK)
 * **Prontuario:** id_prontuario (PK), data_registro, sintomas, diagnostico, tratamento, observacoes, id_animal (FK), id_veterinario (FK)
-* **Pagamento:** id_pagamento (PK), data_pagamento, valor, forma_pagamento, status, id_consulta (FK)

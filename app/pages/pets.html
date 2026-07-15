@@ -1,12 +1,150 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Página de Lista de Pets</title>
-    </head>
-    
-    <body>
-        <h1>SGCV - Sistema de Gerenciamento de Clinicas Vetereninárias</h1>
-    </body>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Pets — VetClin</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ===================== BARRA LATERAL ===================== -->
+    <aside class="sidebar">
+      <a href="../index.html" class="brand">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 13c2-4 4-6 8-6s6 2 8 6" stroke="#14332A" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M4 13c1 3 4 5 8 5s7-2 8-5" stroke="#14332A" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/>
+          </svg>
+        </span>
+        VetClin
+      </a>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 13h6V4H4v9ZM14 20h6v-9h-6v9ZM4 20h6v-4H4v4ZM14 4v4h6V4h-6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Painel
+        </a>
+        <a href="pets.html" class="active">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4 6.5 4c2 0 3.5 1.2 5.5 3.5C14 5.2 15.5 4 17.5 4 21.5 4 23 8 21.5 12 19 16.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Pets
+        </a>
+        <a href="agenda.html">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8 3v4M16 3v4M4 9h16M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          Agenda
+        </a>
+        <a href="exames.html">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 3h6l1 4h3v3l-3 2 3 2v3h-3l-1 4H9l-1-4H5v-3l3-2-3-2V7h3l1-4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          Exames
+        </a>
+        <a href="perfil.html">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.6-3.5 4.4-5.3 7.5-5.3S17.9 16.5 19.5 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Meu perfil
+        </a>
+      </nav>
+      <div class="sidebar-foot">
+        <span class="avatar">MF</span>
+        <div class="who">
+          <strong>Mariana Ferreira</strong>
+          <span>Cliente</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===================== CONTEÚDO ===================== -->
+    <main class="app-main">
+      <div class="app-topbar">
+        <div>
+          <span class="eyebrow">Gestão de animais</span>
+          <h1>Meus pets</h1>
+        </div>
+        <a href="pet.html" class="btn btn-primary">+ Cadastrar pet</a>
+      </div>
+
+      <!-- Barra de busca e filtro -->
+      <div class="toolbar">
+        <div class="search-input">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="text" placeholder="Buscar por nome do pet...">
+        </div>
+        <select class="filter-select">
+          <option>Todas as espécies</option>
+          <option>Cão</option>
+          <option>Gato</option>
+          <option>Ave</option>
+          <option>Outro</option>
+        </select>
+        <select class="filter-select">
+          <option>Ordenar por nome</option>
+          <option>Ordenar por idade</option>
+          <option>Ordenar por peso</option>
+        </select>
+      </div>
+
+      <!-- Grade de cards de animais -->
+      <div class="grid grid-3">
+
+        <div class="card animal-card">
+          <div class="animal-card-top">
+            <span class="pet-avatar">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4 6.5 4c2 0 3.5 1.2 5.5 3.5C14 5.2 15.5 4 17.5 4 21.5 4 23 8 21.5 12 19 16.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="animal-card-name">Luna</div>
+              <div class="animal-card-breed">Golden Retriever</div>
+            </div>
+          </div>
+          <div class="animal-card-stats">
+            <div><div class="fact-label">Espécie</div><div class="fact-value">Cão</div></div>
+            <div><div class="fact-label">Peso</div><div class="fact-value">28 kg</div></div>
+            <div><div class="fact-label">Nascimento</div><div class="fact-value">03/05/2021</div></div>
+            <div><div class="fact-label">Sexo</div><div class="fact-value">Fêmea</div></div>
+          </div>
+          <a href="pet.html" class="btn btn-secondary btn-block">Visualizar perfil completo</a>
+        </div>
+
+        <div class="card animal-card">
+          <div class="animal-card-top">
+            <span class="pet-avatar">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4 6.5 4c2 0 3.5 1.2 5.5 3.5C14 5.2 15.5 4 17.5 4 21.5 4 23 8 21.5 12 19 16.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="animal-card-name">Nino</div>
+              <div class="animal-card-breed">Gato Siamês</div>
+            </div>
+          </div>
+          <div class="animal-card-stats">
+            <div><div class="fact-label">Espécie</div><div class="fact-value">Gato</div></div>
+            <div><div class="fact-label">Peso</div><div class="fact-value">4,2 kg</div></div>
+            <div><div class="fact-label">Nascimento</div><div class="fact-value">17/11/2022</div></div>
+            <div><div class="fact-label">Sexo</div><div class="fact-value">Macho</div></div>
+          </div>
+          <a href="pet.html" class="btn btn-secondary btn-block">Visualizar perfil completo</a>
+        </div>
+
+        <div class="card animal-card">
+          <div class="animal-card-top">
+            <span class="pet-avatar">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4 6.5 4c2 0 3.5 1.2 5.5 3.5C14 5.2 15.5 4 17.5 4 21.5 4 23 8 21.5 12 19 16.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <div class="animal-card-name">Bento</div>
+              <div class="animal-card-breed">Vira-lata caramelo</div>
+            </div>
+          </div>
+          <div class="animal-card-stats">
+            <div><div class="fact-label">Espécie</div><div class="fact-value">Cão</div></div>
+            <div><div class="fact-label">Peso</div><div class="fact-value">15 kg</div></div>
+            <div><div class="fact-label">Nascimento</div><div class="fact-value">29/01/2023</div></div>
+            <div><div class="fact-label">Sexo</div><div class="fact-value">Macho</div></div>
+          </div>
+          <a href="pet.html" class="btn btn-secondary btn-block">Visualizar perfil completo</a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+</body>
 </html>

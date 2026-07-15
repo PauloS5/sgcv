@@ -1,12 +1,189 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Página de Agenda</title>
-    </head>
-    
-    <body>
-        <h1>SGCV - Sistema de Gerenciamento de Clinicas Vetereninárias</h1>
-    </body>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda — VetClin</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ===================== BARRA LATERAL ===================== -->
+    <aside class="sidebar">
+      <a href="../index.html" class="brand">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 13c2-4 4-6 8-6s6 2 8 6" stroke="#14332A" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M4 13c1 3 4 5 8 5s7-2 8-5" stroke="#14332A" stroke-width="1.8" stroke-linecap="round" opacity="0.55"/>
+          </svg>
+        </span>
+        VetClin
+      </a>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 13h6V4H4v9ZM14 20h6v-9h-6v9ZM4 20h6v-4H4v4ZM14 4v4h6V4h-6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Painel
+        </a>
+        <a href="pets.html">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4 6.5 4c2 0 3.5 1.2 5.5 3.5C14 5.2 15.5 4 17.5 4 21.5 4 23 8 21.5 12 19 16.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Pets
+        </a>
+        <a href="agenda.html" class="active">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8 3v4M16 3v4M4 9h16M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          Agenda
+        </a>
+        <a href="exames.html">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 3h6l1 4h3v3l-3 2 3 2v3h-3l-1 4H9l-1-4H5v-3l3-2-3-2V7h3l1-4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          Exames
+        </a>
+        <a href="perfil.html">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.6-3.5 4.4-5.3 7.5-5.3S17.9 16.5 19.5 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Meu perfil
+        </a>
+      </nav>
+      <div class="sidebar-foot">
+        <span class="avatar">MF</span>
+        <div class="who">
+          <strong>Mariana Ferreira</strong>
+          <span>Cliente</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===================== CONTEÚDO ===================== -->
+    <main class="app-main">
+      <div class="app-topbar">
+        <div>
+          <span class="eyebrow">Agendamento</span>
+          <h1>Agenda</h1>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="align-items:start;">
+
+        <!-- ============ FORMULÁRIO DE MARCAÇÃO (CLIENTE) ============ -->
+        <div class="form-card">
+          <h3 class="mb-2">Marcar nova consulta</h3>
+          <p class="text-muted mb-4">Escolha o pet, o veterinário e o melhor horário para o atendimento.</p>
+          <form action="#" method="post">
+            <div class="field">
+              <label for="pet">Selecionar pet</label>
+              <select class="input" id="pet" name="pet">
+                <option>Luna — Golden Retriever</option>
+                <option>Nino — Gato Siamês</option>
+                <option>Bento — Vira-lata caramelo</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="veterinario">Selecionar veterinário</label>
+              <select class="input" id="veterinario" name="veterinario">
+                <option>Dra. Patrícia Lima — Clínica geral</option>
+                <option>Dr. Eduardo Nogueira — Dermatologia</option>
+                <option>Dra. Camila Duarte — Ortopedia</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="data">Data</label>
+                <input class="input" type="date" id="data" name="data">
+              </div>
+              <div class="field">
+                <label for="hora">Hora</label>
+                <input class="input" type="time" id="hora" name="hora">
+              </div>
+            </div>
+            <div class="field">
+              <label for="motivo">Motivo da consulta</label>
+              <textarea class="input" id="motivo" name="motivo" placeholder="Descreva brevemente o motivo da consulta"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Confirmar agendamento</button>
+          </form>
+        </div>
+
+        <!-- ============ PRÓXIMOS COMPROMISSOS (CLIENTE) ============ -->
+        <div class="flex" style="flex-direction:column; gap: var(--space-4);">
+          <div class="card">
+            <div class="flex-between mb-2">
+              <strong>Luna — Retorno pós-cirúrgico</strong>
+              <span class="tag tag-confirmed">Confirmada</span>
+            </div>
+            <p class="text-muted">22/07/2026 às 11:30 · Dra. Patrícia Lima</p>
+          </div>
+          <div class="card">
+            <div class="flex-between mb-2">
+              <strong>Nino — Vacinação anual</strong>
+              <span class="tag tag-pending">Pendente</span>
+            </div>
+            <p class="text-muted">Aguardando confirmação da clínica</p>
+          </div>
+          <div class="card">
+            <div class="flex-between mb-2">
+              <strong>Bento — Avaliação ortopédica</strong>
+              <span class="tag tag-cancelled">Cancelada</span>
+            </div>
+            <p class="text-muted">05/07/2026 · Cancelada pelo tutor</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAINEL DE CONTROLE (VETERINÁRIO) ============ -->
+      <section class="section-head mt-6">
+        <span class="eyebrow">Painel do veterinário</span>
+        <h2>Controle de consultas</h2>
+        <svg class="vital-divider" viewBox="0 0 92 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9h20l5-8 6 16 5-11 4 3h52"/></svg>
+      </section>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Data/hora</th>
+              <th>Pet</th>
+              <th>Tutor</th>
+              <th>Motivo</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>22/07/2026 11:30</td>
+              <td>Luna</td>
+              <td>Mariana Ferreira</td>
+              <td>Retorno pós-cirúrgico</td>
+              <td><span class="tag tag-confirmed">Confirmada</span></td>
+              <td class="flex gap-2"><a href="#" class="btn btn-sm btn-secondary">Ver</a></td>
+            </tr>
+            <tr>
+              <td>23/07/2026 09:00</td>
+              <td>Nino</td>
+              <td>Mariana Ferreira</td>
+              <td>Vacinação anual</td>
+              <td><span class="tag tag-pending">Pendente</span></td>
+              <td class="flex gap-2"><a href="#" class="btn btn-sm btn-primary">Confirmar</a></td>
+            </tr>
+            <tr>
+              <td>18/07/2026 14:15</td>
+              <td>Thor</td>
+              <td>Carlos Andrade</td>
+              <td>Check-up anual</td>
+              <td><span class="tag tag-done">Finalizada</span></td>
+              <td class="flex gap-2"><a href="#" class="btn btn-sm btn-secondary">Ver</a></td>
+            </tr>
+            <tr>
+              <td>05/07/2026 16:00</td>
+              <td>Bento</td>
+              <td>Rafael Souza</td>
+              <td>Avaliação ortopédica</td>
+              <td><span class="tag tag-cancelled">Cancelada</span></td>
+              <td class="flex gap-2"><a href="#" class="btn btn-sm btn-secondary">Ver</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+</body>
 </html>

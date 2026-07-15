@@ -1,0 +1,908 @@
+/* ============================================================
+   VETCLIN — FOLHA DE ESTILO GLOBAL
+   Sistema de gestão para clínica veterinária.
+   Identidade: verde-hospitalar + branco, tipografia serifada
+   no papel de "voz da clínica" (Fraunces) combinada com uma
+   sans utilitária para dados e formulários (Inter), mais uma
+   mono para códigos/IDs (JetBrains Mono).
+   Elemento de assinatura: a "linha vital" — um traço em onda,
+   inspirado num monitor de sinais vitais, usado como divisor
+   sob títulos de seção e como base do logotipo.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+/* ---------- 1. RESET ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Foco visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- 2. TOKENS DE DESIGN ---------- */
+:root {
+  /* Cor — paleta "verde-hospitalar" */
+  --color-bg: #F5F9F6;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #EEF5F0;
+  --color-primary: #1F4A38;
+  --color-primary-dark: #14332A;
+  --color-primary-light: #3F7C5C;
+  --color-accent: #7FB69A;
+  --color-accent-soft: #E3F0E8;
+  --color-amber: #C98A3E;
+  --color-amber-soft: #FBEEDD;
+  --color-danger: #B24B36;
+  --color-danger-soft: #F8E6E1;
+  --color-text: #16241C;
+  --color-text-muted: #566A5E;
+  --color-text-faint: #8AA095;
+  --color-border: #DCE6DF;
+  --color-border-strong: #BFD0C6;
+
+  /* Tipografia */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Espaçamento */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* Raio e sombra */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(20, 51, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(20, 51, 42, 0.09);
+  --shadow-lg: 0 20px 45px rgba(20, 51, 42, 0.14);
+
+  /* Layout */
+  --container-width: 1180px;
+  --sidebar-width: 250px;
+  --header-height: 72px;
+}
+
+/* ---------- 3. TIPOGRAFIA BASE ---------- */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-primary-dark);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.1rem, 1.6rem + 2vw, 3.4rem); font-weight: 700; }
+h2 { font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.3rem); }
+h3 { font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.5rem); }
+h4 { font-size: 1.05rem; }
+
+p { color: var(--color-text-muted); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary-light);
+}
+
+/* ---------- 4. ELEMENTO DE ASSINATURA: LINHA VITAL ---------- */
+/* Divisor em forma de onda de monitor de sinais vitais, usado
+   sob títulos de seção para reforçar a identidade "clínica". */
+.vital-divider {
+  width: 92px;
+  height: 18px;
+  margin-block: var(--space-3) var(--space-5);
+}
+.vital-divider path {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.vital-divider.on-dark path {
+  stroke: #BFE3CE;
+}
+
+/* ---------- 5. LAYOUT / CONTAINERS ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.section {
+  padding-block: var(--space-8);
+}
+
+.section--tight {
+  padding-block: var(--space-6);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 620px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ---------- 6. NAVBAR PÚBLICA (index, login, cadastrar) ---------- */
+.public-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(245, 249, 246, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.public-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-primary-dark);
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  display: grid;
+  place-items: center;
+}
+
+.brand-mark svg { width: 20px; height: 20px; }
+
+.public-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.public-links a {
+  font-weight: 500;
+  font-size: 0.94rem;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.public-links a:hover { color: var(--color-primary-dark); }
+
+.public-actions { display: flex; gap: var(--space-3); align-items: center; }
+
+@media (max-width: 760px) {
+  .public-links { display: none; }
+}
+
+/* ---------- 7. BOTÕES ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 0.72rem 1.4rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover { background: var(--color-primary-dark); box-shadow: var(--shadow-md); }
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-primary-dark);
+  border-color: var(--color-border-strong);
+}
+.btn-secondary:hover { border-color: var(--color-primary); background: var(--color-accent-soft); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary-dark);
+  padding: 0.6rem 0.9rem;
+}
+.btn-ghost:hover { background: var(--color-accent-soft); }
+
+.btn-danger {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+.btn-danger:hover { background: var(--color-danger); color: #fff; }
+
+.btn-sm { padding: 0.48rem 0.95rem; font-size: 0.82rem; }
+.btn-block { width: 100%; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ---------- 8. FORMULÁRIOS ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.field label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.field .hint {
+  font-size: 0.78rem;
+  color: var(--color-text-faint);
+}
+
+.input, select.input, textarea.input {
+  width: 100%;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  padding: 0.78rem 0.95rem;
+  font-size: 0.94rem;
+  color: var(--color-text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input:focus, select.input:focus, textarea.input:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+  outline: none;
+}
+
+textarea.input { resize: vertical; min-height: 110px; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 620px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.form-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+.checkbox-row input { width: 16px; height: 16px; accent-color: var(--color-primary); }
+
+.file-drop {
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-text-faint);
+  background: var(--color-surface-alt);
+  font-size: 0.86rem;
+}
+.file-drop strong { color: var(--color-primary-dark); }
+
+/* ---------- 9. CARDS ---------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover { box-shadow: var(--shadow-md); }
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.metric-card .metric-value {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.metric-card .metric-label {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.metric-card .metric-delta {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+.metric-delta.up { color: var(--color-primary-light); }
+.metric-delta.down { color: var(--color-danger); }
+
+/* ---------- 10. TAGS / BADGES DE STATUS (id-tag) ---------- */
+/* Formato inspirado numa etiqueta de coleira: retângulo
+   arredondado com um pequeno "furo" à esquerda. */
+.tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.32rem 0.75rem 0.32rem 1.15rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-primary-dark);
+}
+.tag::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.tag-pending { background: var(--color-amber-soft); color: var(--color-amber); }
+.tag-confirmed { background: var(--color-accent-soft); color: var(--color-primary-light); }
+.tag-done { background: #E5EEE9; color: var(--color-primary-dark); }
+.tag-cancelled { background: var(--color-danger-soft); color: var(--color-danger); }
+
+/* ---------- 11. TABELAS ---------- */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+thead th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  font-weight: 600;
+  padding: var(--space-4) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+tbody td {
+  padding: var(--space-4);
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--color-surface-alt); }
+
+/* ---------- 12. NAVEGAÇÃO INTERNA (área logada) ---------- */
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--color-primary-dark);
+  color: #EAF3EE;
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar .brand { color: #fff; padding-inline: var(--space-2); }
+.sidebar .brand-mark { background: var(--color-accent); }
+.sidebar .brand-mark svg path,
+.sidebar .brand-mark svg circle { stroke: var(--color-primary-dark); }
+
+.sidebar-nav { display: flex; flex-direction: column; gap: var(--space-1); flex: 1; }
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.72rem var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #C6DBCD;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-nav a svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.sidebar-nav a:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+.sidebar-nav a.active {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+.sidebar-foot {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+
+.sidebar-foot .who { display: flex; flex-direction: column; line-height: 1.25; }
+.sidebar-foot .who strong { font-size: 0.86rem; color: #fff; }
+.sidebar-foot .who span { font-size: 0.74rem; color: #A9C4B5; }
+
+.app-main {
+  padding: var(--space-6) var(--space-7);
+}
+
+.app-topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.app-topbar .eyebrow { display: block; margin-bottom: var(--space-1); }
+
+/* Menu móvel simples via checkbox (sem JS) */
+.mobile-nav-toggle { display: none; }
+
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar {
+    position: relative;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+  }
+  .sidebar-nav { flex-direction: row; overflow-x: auto; }
+  .sidebar-foot { display: none; }
+  .app-main { padding: var(--space-5); }
+}
+
+/* ---------- 13. HERO (index) ---------- */
+.hero {
+  background: linear-gradient(180deg, var(--color-accent-soft) 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: var(--space-7);
+  padding-block: var(--space-8);
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+}
+
+.hero-copy p { max-width: 46ch; margin-block: var(--space-4) var(--space-6); font-size: 1.05rem; }
+
+.hero-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+.hero-art {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-art svg { width: 100%; height: auto; }
+
+/* ---------- 14. LISTAS DE SERVIÇOS / CONTATO (public) ---------- */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.service-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  display: grid;
+  place-items: center;
+  color: var(--color-primary);
+}
+
+.contact-strip {
+  background: var(--color-primary-dark);
+  color: #EAF3EE;
+}
+.contact-strip .container { padding-block: var(--space-7); }
+.contact-strip h2 { color: #fff; }
+.contact-strip p { color: #C6DBCD; }
+
+.contact-grid { display: flex; gap: var(--space-7); flex-wrap: wrap; margin-top: var(--space-5); }
+.contact-item { display: flex; gap: var(--space-3); align-items: flex-start; }
+.contact-item .service-icon { background: rgba(255,255,255,0.1); color: #BFE3CE; }
+.contact-item strong { display: block; color: #fff; font-size: 0.92rem; }
+.contact-item span { font-size: 0.86rem; color: #A9C4B5; }
+
+/* ---------- 15. RODAPÉ PÚBLICO ---------- */
+.public-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-6);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.footer-inner span { font-size: 0.82rem; color: var(--color-text-faint); }
+.footer-links { display: flex; gap: var(--space-5); }
+.footer-links a { font-size: 0.82rem; color: var(--color-text-muted); }
+.footer-links a:hover { color: var(--color-primary-dark); }
+
+/* ---------- 16. AUTENTICAÇÃO (login/cadastro) ---------- */
+.auth-shell {
+  min-height: calc(100vh - var(--header-height));
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-card.wide { max-width: 620px; }
+
+.auth-card .brand-mark { margin-inline: auto; margin-bottom: var(--space-4); }
+.auth-card h1 { font-size: 1.7rem; text-align: center; }
+.auth-card > p.lead { text-align: center; margin-block: var(--space-2) var(--space-6); }
+
+.auth-foot {
+  text-align: center;
+  margin-top: var(--space-5);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+.auth-foot a { color: var(--color-primary); font-weight: 600; }
+
+/* ---------- 17. ABAS (perfil do pet) ---------- */
+.tabs {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.tab-label {
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab-label.is-active {
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+
+.tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.tab-panel h3 { margin-bottom: var(--space-1); }
+
+/* ---------- 18. PERFIL DE ANIMAL — HEADER ---------- */
+.pet-header {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.pet-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-soft);
+  display: grid;
+  place-items: center;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.pet-facts {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+
+.pet-fact { display: flex; flex-direction: column; gap: 2px; }
+.pet-fact .fact-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-faint); }
+.pet-fact .fact-value { font-size: 0.94rem; font-weight: 600; color: var(--color-primary-dark); }
+
+/* ---------- 19. BUSCA / FILTROS (pets.html) ---------- */
+.toolbar {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+
+.search-input {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  padding: 0.65rem 1.1rem;
+}
+.search-input svg { width: 16px; height: 16px; color: var(--color-text-faint); flex-shrink: 0; }
+.search-input input { border: none; outline: none; background: transparent; width: 100%; font-size: 0.9rem; }
+
+.filter-select {
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  padding: 0.65rem 1.1rem;
+  background: var(--color-surface);
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+/* ---------- 20. CARDS DE ANIMAL (grid) ---------- */
+.animal-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.animal-card-top {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.animal-card .pet-avatar { width: 56px; height: 56px; }
+
+.animal-card-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--color-primary-dark); }
+.animal-card-breed { font-size: 0.82rem; color: var(--color-text-muted); }
+
+.animal-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+}
+
+.animal-card-stats .fact-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; color: var(--color-text-faint); letter-spacing: 0.06em; }
+.animal-card-stats .fact-value { font-size: 0.88rem; font-weight: 600; color: var(--color-text); }
+
+/* ---------- 21. TIMELINE (histórico médico) ---------- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-left: 2px solid var(--color-border);
+}
+.timeline-item:last-child { border-color: transparent; padding-bottom: 0; }
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -6.5px;
+  top: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2px solid var(--color-surface);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-1);
+}
+
+.timeline-body {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+}
+
+/* ---------- 22. UTILITÁRIOS ---------- */
+.text-muted { color: var(--color-text-muted); }
+.text-center { text-align: center; }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.flex { display: flex; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.section-head { margin-bottom: var(--space-5); }
+.empty-state {
+  text-align: center;
+  padding: var(--space-7) var(--space-5);
+  color: var(--color-text-faint);
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+}
